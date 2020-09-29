@@ -13,7 +13,17 @@
 
 ## Description 
 
-This is a demo project for "People Count Application" using NVIDIA Deepstream SDK and Transfer Learning Toolkit (TLT).The application is based on deepstream-test5 application. It takes the input source data, uses PeopleNet model for inferencing and sends the people count data to cloud. 
+  This is a sample application for counting people entering/leaving in a building using NVIDIA Deepstream SDK, Transfer Learning Toolkit (TLT) and pre-trained models. This application can be used to build real-time occupancy analytics application for smart buildings, hospitals, retail, etc. The application is based on deepstream-test5 sample application.
+
+   It takes streaming video as input, counts the number of people crossing a tripwire and sends the live data to the cloud. In this application, you will learn:
+
+  How to use PeopleNet model from NGC
+  How to use NvDsAnalytics plugin to draw line and count people crossing the line
+  How to send the analytics data to cloud or another microservice over Kafka
+ 
+  You can extend this application to change region of interest, use cloud-to-edge messaging to trigger record in the DeepStream application or build analytic dashboard or database to store the metadata.
+
+To learn how to build this demo step-by-step, check out the on-demand webinar on Creating Intelligent places using DeepStream SDK[https://info.nvidia.com/iva-occupancy-webinar-reg-page.html?ondemandrgt=yes].
 
 ## Prerequisites
 
