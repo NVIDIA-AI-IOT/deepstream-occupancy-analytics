@@ -49,14 +49,14 @@ To learn how to build this demo step-by-step, check out the on-demand webinar on
 ## Getting Started
 
 - Preferably clone the repo in $DS_SDK_ROOT/sources/apps/sample_apps/ 
-- Download peoplnet model: `cd demo/config && ./model.sh`
+- Download peoplnet model: `cd deepstream-occupancy-analytics/config && ./model.sh`
 - For Jetson use:  bin/jetson/libnvds_msgconv.so
 - For x86 use: bin/x86/libnvds_msgconv.so
 	 
 
 ## Build
 
- `cd demo && make`
+ `cd deepstream-occupancy-analytics && make`
 
 ## Run 
 
