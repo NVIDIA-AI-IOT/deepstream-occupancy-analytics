@@ -71,7 +71,7 @@ To learn how to build this demo step-by-step, check out the on-demand webinar on
 
   The output will look like this: 
 
-  ![alt-text](https://gitlab-master.nvidia.com/mjhuria/demo/-/raw/master/images/kafka_messages.gif)
+  ![alt-text](https://github.com/NVIDIA-AI-IOT/deepstream-occupancy-analytics/blob/master/images/kafka_messages.gif)
 
   Where you can see the kafka messages for entry and exit count.
   
