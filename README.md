@@ -2,7 +2,7 @@
 
 * [Description](#description)
 * [Prerequisites](#prerequisites)
-* [Getting Started](#Getting Started)
+* [Getting Started](#GettingStarted)
 * [Build](#build)
 * [Run](#run)
 * [Output](#output)
