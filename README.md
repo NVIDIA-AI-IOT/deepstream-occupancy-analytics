@@ -17,13 +17,13 @@
 
    It takes streaming video as input, counts the number of people crossing a tripwire and sends the live data to the cloud. In this application, you will learn:
 
-  How to use PeopleNet model from NGC
-  How to use NvDsAnalytics plugin to draw line and count people crossing the line
-  How to send the analytics data to cloud or another microservice over Kafka
+  - How to use PeopleNet model from NGC
+  - How to use NvDsAnalytics plugin to draw line and count people crossing the line
+  - How to send the analytics data to cloud or another microservice over Kafka
  
   You can extend this application to change region of interest, use cloud-to-edge messaging to trigger record in the DeepStream application or build analytic dashboard or database to store the metadata.
 
-To learn how to build this demo step-by-step, check out the on-demand webinar on Creating Intelligent places using DeepStream SDK[https://info.nvidia.com/iva-occupancy-webinar-reg-page.html?ondemandrgt=yes].
+To learn how to build this demo step-by-step, check out the on-demand webinar on [Creating Intelligent places using DeepStream SDK](https://info.nvidia.com/iva-occupancy-webinar-reg-page.html?ondemandrgt=yes).
 
 ## Prerequisites
 
