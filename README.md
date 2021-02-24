@@ -60,7 +60,7 @@ To learn how to build this demo step-by-step, check out the on-demand webinar on
 
 ## Run 
 
- `./deepstream_test5 -c configs/test5_config_file_src_infer_tlt.txt`
+ `./deepstream-test5-analytics -c configs/test5_config_file_src_infer_tlt.txt`
 
   In another terminal run this command to see the kafka messages:
 
