@@ -46,7 +46,7 @@ PKGS:= gstreamer-1.0 gstreamer-video-1.0 x11 json-glib-1.0
 OBJS:= $(SRCS:.c=.o)
 OBJS+= deepstream_nvdsanalytics_meta.o
 
-CFLAGS+= -I../../apps-common/includes -I./includes -I../../../includes -I../deepstream-app/ -DDS_VERSION_MINOR=0 -DDS_VERSION_MAJOR=5
+CFLAGS+= -I../../apps-common/includes -I./includes -I../../../includes -I../deepstream-app/ -DDS_VERSION_MINOR=1 -DDS_VERSION_MAJOR=5
 CFLAGS+= -I$(INC_DIR)
 
 
