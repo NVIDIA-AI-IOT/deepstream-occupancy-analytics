@@ -100,7 +100,7 @@ msg-conv-config=dstest5_msgconv_sample_config.txt
 #(256): PAYLOAD_RESERVED - Reserved type
 #(257): PAYLOAD_CUSTOM   - Custom schema payload
 msg-conv-payload-type=0
-msg-broker-proto-lib=/opt/nvidia/deepstream/deepstream-5.0/lib/libnvds_kafka_proto.so
+msg-broker-proto-lib=/opt/nvidia/deepstream/deepstream-5.1/lib/libnvds_kafka_proto.so
 #Provide your msg-broker-conn-str here
 msg-broker-conn-str=localhost;9092;quickstart-events
 #topic=<topic>
