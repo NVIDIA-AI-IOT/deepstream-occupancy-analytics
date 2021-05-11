@@ -44,7 +44,7 @@ nvbuf-memory-type=0
 enable=1
 #Type - 1=CameraV4L2 2=URI 3=MultiURI
 type=3
-uri=file:///opt/nvidia/deepstream/deepstream-5.0/sources/apps/sample_apps/demo/out.mp4
+uri=file:///opt/nvidia/deepstream/deepstream-5.1/sources/apps/sample_apps/demo/out.mp4
 num-sources=1
 gpu-id=0
 nvbuf-memory-type=0
@@ -53,7 +53,7 @@ nvbuf-memory-type=0
 enable=1
 #Type - 1=CameraV4L2 2=URI 3=MultiURI 4=RTSP
 type=3
-uri=file:///opt/nvidia/deepstream/deepstream-5.0/samples/streams/sample_1080p_h264.mp4
+uri=file:///opt/nvidia/deepstream/deepstream-5.1/samples/streams/sample_1080p_h264.mp4
 num-sources=1
 gpu-id=0
 nvbuf-memory-type=0
@@ -201,7 +201,7 @@ config-file=config_infer_primary_peoplenet.txt
 enable=1
 tracker-width=640
 tracker-height=288
-ll-lib-file=/opt/nvidia/deepstream/deepstream-5.0/lib/libnvds_nvdcf.so
+ll-lib-file=/opt/nvidia/deepstream/deepstream-5.1/lib/libnvds_nvdcf.so
 #ll-config-file required for DCF/IOU only
 ll-config-file=tracker_config.yml
 #ll-config-file=iou_config.txt
