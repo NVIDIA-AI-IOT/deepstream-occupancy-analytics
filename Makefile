@@ -20,6 +20,12 @@
 # DEALINGS IN THE SOFTWARE.
 ################################################################################
 
+CUDA_VER?=
+ifeq ($(CUDA_VER),)
+        $(error "CUDA_VER is not set run: export CUDA_VER=11.1")
+
+endif
+
 APP:= deepstream-test5-analytics
 
 TARGET_DEVICE = $(shell gcc -dumpmachine | cut -f1 -d -)
@@ -48,10 +54,11 @@ OBJS+= deepstream_nvdsanalytics_meta.o
 
 CFLAGS+= -I../../apps-common/includes -I./includes -I../../../includes -I../deepstream-app/ -DDS_VERSION_MINOR=1 -DDS_VERSION_MAJOR=5
 CFLAGS+= -I$(INC_DIR)
-
+CFLAGS+= -I/usr/local/cuda-$(CUDA_VER)/include
 
 LIBS+= -L$(LIB_INSTALL_DIR) -lnvdsgst_meta -lnvds_meta -lnvdsgst_helper -lnvdsgst_smartrecord -lnvds_utils -lnvds_msgbroker -lm \
        -lgstrtspserver-1.0 -ldl -Wl,-rpath,$(LIB_INSTALL_DIR)
+LIBS+= -L/usr/local/cuda-$(CUDA_VER)/lib64/ -lcudart
 
 CFLAGS+= `pkg-config --cflags $(PKGS)`
 
