@@ -40,8 +40,8 @@ gpu-id=0
 nvbuf-memory-type=0
 
 
-[source0]
-enable=1
+[source1]
+enable=0
 #Type - 1=CameraV4L2 2=URI 3=MultiURI
 type=3
 uri=file:///opt/nvidia/deepstream/deepstream-5.1/sources/apps/sample_apps/demo/out.mp4
@@ -49,11 +49,11 @@ num-sources=1
 gpu-id=0
 nvbuf-memory-type=0
 
-[source1]
+[source0]
 enable=1
 #Type - 1=CameraV4L2 2=URI 3=MultiURI 4=RTSP
 type=3
-uri=file:///opt/nvidia/deepstream/deepstream-5.1/samples/streams/sample_1080p_h264.mp4
+uri=file:///opt/nvidia/deepstream/deepstream-6.0/samples/streams/sample_1080p_h264.mp4
 num-sources=1
 gpu-id=0
 nvbuf-memory-type=0
@@ -100,7 +100,7 @@ msg-conv-config=dstest5_msgconv_sample_config.txt
 #(256): PAYLOAD_RESERVED - Reserved type
 #(257): PAYLOAD_CUSTOM   - Custom schema payload
 msg-conv-payload-type=0
-msg-broker-proto-lib=/opt/nvidia/deepstream/deepstream-5.1/lib/libnvds_kafka_proto.so
+msg-broker-proto-lib=/opt/nvidia/deepstream/deepstream-6.0/lib/libnvds_kafka_proto.so
 #Provide your msg-broker-conn-str here
 msg-broker-conn-str=localhost;9092;quickstart-events
 #topic=<topic>
@@ -201,7 +201,7 @@ config-file=config_infer_primary_peoplenet.txt
 enable=1
 tracker-width=640
 tracker-height=288
-ll-lib-file=/opt/nvidia/deepstream/deepstream-5.1/lib/libnvds_nvdcf.so
+ll-lib-file=/opt/nvidia/deepstream/deepstream-6.0/lib/libnvds_nvmultiobjecttracker.so
 #ll-config-file required for DCF/IOU only
 ll-config-file=tracker_config.yml
 #ll-config-file=iou_config.txt
