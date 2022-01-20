@@ -175,7 +175,6 @@ GOptionEntry entries[] = {
     ,
 };
 
-
     static void
 generate_ts_rfc3339 (char *buf, int buf_size)
 {
@@ -266,8 +265,10 @@ meta_copy_func (gpointer data, gpointer user_data)
     NvDsUserMeta *user_meta = (NvDsUserMeta *) data;
     NvDsEventMsgMeta *srcMeta = (NvDsEventMsgMeta *) user_meta->user_meta_data;
     NvDsEventMsgMeta *dstMeta = NULL;
+   
+    dstMeta = (NvDsEventMsgMeta *)g_memdup ((gpointer)srcMeta, sizeof(NvDsEventMsgMeta));
+    dstMeta->extMsg = (gpointer)g_memdup(srcMeta->extMsg, sizeof(srcMeta->extMsgSize));
 
-    dstMeta = g_memdup (srcMeta, sizeof (NvDsEventMsgMeta));
 
     if (srcMeta->ts)
 	dstMeta->ts = g_strdup (srcMeta->ts);
@@ -282,7 +283,7 @@ meta_copy_func (gpointer data, gpointer user_data)
 	dstMeta->objectId = g_strdup (srcMeta->objectId);
     }
 
-    /*
+   /*
        if (srcMeta->sensorStr) {
        dstMeta->sensorStr = g_strdup (srcMeta->sensorStr);
        }
@@ -310,6 +311,8 @@ meta_copy_func (gpointer data, gpointer user_data)
 	}
     }
 
+       g_print(" %s %d source id: %d, Enter: %d, Exit: %d\n",__func__,__LINE__, dstMeta->source_id, dstMeta->lccum_cnt_entry, dstMeta->lccum_cnt_exit);
+
     return dstMeta;
 }
 
@@ -319,6 +322,7 @@ meta_free_func (gpointer data, gpointer user_data)
     NvDsUserMeta *user_meta = (NvDsUserMeta *) data;
     NvDsEventMsgMeta *srcMeta = (NvDsEventMsgMeta *) user_meta->user_meta_data;
     user_meta->user_meta_data = NULL;
+
 
     if (srcMeta->ts) {
 	g_free (srcMeta->ts);
