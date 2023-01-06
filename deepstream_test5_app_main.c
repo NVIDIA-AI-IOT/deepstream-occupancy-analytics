@@ -311,7 +311,7 @@ meta_copy_func (gpointer data, gpointer user_data)
 	}
     }
 
-       g_print(" %s %d source id: %d, Enter: %d, Exit: %d\n",__func__,__LINE__, dstMeta->source_id, dstMeta->lccum_cnt_entry, dstMeta->lccum_cnt_exit);
+    //    g_print(" %s %d source id: %d, Enter: %d, Exit: %d\n",__func__,__LINE__, dstMeta->source_id, dstMeta->lccum_cnt_entry, dstMeta->lccum_cnt_exit);
 
     return dstMeta;
 }
