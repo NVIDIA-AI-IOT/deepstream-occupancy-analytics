@@ -27,8 +27,8 @@ perf-measurement-interval-sec=5
 
 [tiled-display]
 enable=1
-rows=1
-columns=1
+rows=5
+columns=10
 width=1280
 height=720
 gpu-id=0
@@ -54,7 +54,7 @@ enable=1
 #Type - 1=CameraV4L2 2=URI 3=MultiURI 4=RTSP
 type=3
 uri=file:///opt/nvidia/deepstream/deepstream-6.0/samples/streams/sample_1080p_h264.mp4
-num-sources=1
+num-sources=50
 gpu-id=0
 nvbuf-memory-type=0
 # smart record specific fields, valid only for source type=4
@@ -102,7 +102,7 @@ msg-conv-config=dstest5_msgconv_sample_config.txt
 msg-conv-payload-type=0
 msg-broker-proto-lib=/opt/nvidia/deepstream/deepstream-6.0/lib/libnvds_kafka_proto.so
 #Provide your msg-broker-conn-str here
-msg-broker-conn-str=localhost;9092;quickstart-events
+msg-broker-conn-str=192.168.50.100;9092;quickstart-events
 #topic=<topic>
 #Optional:
 #msg-broker-config=../../deepstream-test4/cfg_kafka.txt
@@ -165,7 +165,7 @@ nvbuf-memory-type=0
 gpu-id=0
 ##Boolean property to inform muxer that sources are live
 live-source=0
-batch-size=1
+batch-size=20
 ##time out in usec, to wait after the first buffer is available
 ##to push the batch even if the complete batch is not formed
 batched-push-timeout=40000
@@ -183,7 +183,7 @@ nvbuf-memory-type=0
 [primary-gie]
 enable=1
 gpu-id=0
-batch-size=1
+batch-size=50
 ## 0=FP32, 1=INT8, 2=FP16 mode
 bbox-border-color0=1;0;0;1
 #bbox-border-color1=0;1;1;1
@@ -192,7 +192,7 @@ bbox-border-color0=1;0;0;1
 nvbuf-memory-type=0
 interval=0
 gie-unique-id=1
-model-engine-file=peoplenet/resnet34_peoplenet_pruned.etlt_b1_gpu0_int8.engine
+model-engine-file=peoplenet/resnet34_peoplenet_pruned.etlt_b50_gpu0_int8.engine
 labelfile-path=peoplenet/labels.txt
 config-file=config_infer_primary_peoplenet.txt
 #infer-raw-output-dir=../../../../../samples/primary_detector_raw_output/
