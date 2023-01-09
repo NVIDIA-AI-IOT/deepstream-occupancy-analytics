@@ -1,0 +1,5 @@
+*.o
+config/peoplenet/
+deepstream-test5-analytics
+video/
+config/onnx/

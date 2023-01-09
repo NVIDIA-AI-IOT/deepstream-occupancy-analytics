@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, NVIDIA CORPORATION.  All rights reserved.
+ * Copyright (c) 2018-2021, NVIDIA CORPORATION.  All rights reserved.
  *
  * NVIDIA Corporation and its licensors retain all intellectual property
  * and proprietary rights in and to this software, related documentation
@@ -66,6 +66,9 @@ typedef enum NvDsObjectType {
   NVDS_OBJECT_TYPE_BAG,
   NVDS_OBJECT_TYPE_BICYCLE,
   NVDS_OBJECT_TYPE_ROADSIGN,
+  NVDS_OBJECT_TYPE_VEHICLE_EXT,
+  NVDS_OBJECT_TYPE_PERSON_EXT,
+  NVDS_OBJECT_TYPE_FACE_EXT,
   /** Reserved for future use. Custom objects must be assigned values
    greater than this. */
   NVDS_OBJECT_TYPE_RESERVED = 0x100,
@@ -171,6 +174,53 @@ typedef struct NvDsFaceObject {
 } NvDsFaceObject;
 
 /**
+ * Holds a vehicle object's parameters.
+ */
+typedef struct NvDsVehicleObjectExt {
+  gchar *type;      /**< Holds a pointer to the type of the vehicle. */
+  gchar *make;      /**< Holds a pointer to the make of the vehicle. */
+  gchar *model;     /**< Holds a pointer to the model of the vehicle. */
+  gchar *color;     /**< Holds a pointer to the color of the vehicle. */
+  gchar *region;    /**< Holds a pointer to the region of the vehicle. */
+  gchar *license;   /**< Holds a pointer to the license number of the vehicle.*/
+
+  GList *mask;      /**< Holds a list of polygons for vehicle mask. */
+} NvDsVehicleObjectExt;
+
+/**
+ * Holds a person object's parameters.
+ */
+typedef struct NvDsPersonObjectExt {
+  gchar *gender;    /**< Holds a pointer to the person's gender. */
+  gchar *hair;      /**< Holds a pointer to the person's hair color. */
+  gchar *cap;       /**< Holds a pointer to the type of cap the person is
+                     wearing, if any. */
+  gchar *apparel;   /**< Holds a pointer to a description of the person's
+                     apparel. */
+  guint age;        /**< Holds the person's age. */
+
+  GList *mask;      /**< Holds a list of polygons for person mask. */
+} NvDsPersonObjectExt;
+
+/**
+ * Holds a face object's parameters.
+ */
+typedef struct NvDsFaceObjectWithExt {
+  gchar *gender;    /**< Holds a pointer to the person's gender. */
+  gchar *hair;      /**< Holds a pointer to the person's hair color. */
+  gchar *cap;       /**< Holds a pointer to the type of cap the person
+                     is wearing, if any. */
+  gchar *glasses;   /**< Holds a pointer to the type of glasses the person
+                     is wearing, if any. */
+  gchar *facialhair;/**< Holds a pointer to the person's facial hair color. */
+  gchar *name;      /**< Holds a pointer to the person's name. */
+  gchar *eyecolor;  /**< Holds a pointer to the person's eye color. */
+  guint age;        /**< Holds the person's age. */
+
+  GList *mask;      /**< Holds a list of polygons for face mask. */
+} NvDsFaceObjectExt;
+
+/**
  * Holds event message meta data.
  *
  * You can attach various types of objects (vehicle, person, face, etc.)
@@ -207,7 +257,7 @@ typedef struct NvDsEventMsgMeta {
   /** Holds the confidence level of the inference. */
   gdouble confidence;
   /** Holds the object's tracking ID. */
-  gint trackingId;
+  guint64 trackingId;
   /** Holds a pointer to the generated event's timestamp. */
   gchar *ts;
   /** Holds a pointer to the detected or inferred object's ID. */
@@ -226,12 +276,12 @@ typedef struct NvDsEventMsgMeta {
   gpointer extMsg;
   /** Holds the size of the custom object at @a extMsg. */
   guint extMsgSize;
-  
-  /*My data*/
-  guint occupancy;
+
   guint source_id;
+  guint occupancy;
   guint lccum_cnt_entry;
   guint lccum_cnt_exit;
+
 } NvDsEventMsgMeta;
 
 /**
@@ -243,6 +293,16 @@ typedef struct _NvDsEvent {
   /** Holds a pointer to event metadata. */
   NvDsEventMsgMeta *metadata;
 } NvDsEvent;
+
+/**
+ * Holds data for any user defined custom message to be attached to the payload
+ * message : custom message to be attached
+ * size    : size of the custom message
+ */
+typedef struct _NvDsCustomMsgInfo {
+  void *message;
+  guint size;
+}NvDsCustomMsgInfo;
 
 /**
  * Holds payload metadata.
