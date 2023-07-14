@@ -30,15 +30,15 @@ To learn how to build this demo step-by-step, check out the on-demand webinar on
 
 - Install Deepstream: [https://docs.nvidia.com/metropolis/deepstream/dev-guide/index.html#page/DeepStream_Development_Guide/deepstream_quick_start.html#]
 
-- Download PeopleNet model: [https://ngc.nvidia.com/catalog/models/nvidia:tlt_peoplenet]
+- Download PeopleNet model: [https://catalog.ngc.nvidia.com/orgs/nvidia/teams/tao/models/peoplenet/files]
 
-- This application is based on deepstream-test5 application. More about test5 application: [https://docs.nvidia.com/metropolis/deepstream/dev-guide/index.html#page/DeepStream_Development_Guide/deepstream_reference_app_test5.html]
+- This application is based on deepstream-test5 application. More about test5 application: [https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_ref_app_test5.html]
 
 - Install Kafka: [https://kafka.apache.org/quickstart] and create the kafka topic:
 
-  `tar -xzf kafka_2.13-2.6.0.tgz`
+  `tar -xzf kafka_2.13-3.5.0.tgz`
 
-  `cd kafka_2.13-2.6.0` 
+  `cd kafka_2.13-3.5.0`
 
   `bin/zookeeper-server-start.sh config/zookeeper.properties`
 
@@ -60,7 +60,7 @@ To learn how to build this demo step-by-step, check out the on-demand webinar on
 
 ## Run 
 
- `./deepstream-test5-analytics -c config/test5_config_file_src_infer_tlt.txt`
+ `./deepstream-test5-analytics -c config/dstest_occupancy_analytics.txt`
 
   In another terminal run this command to see the kafka messages:
 
