@@ -1,0 +1,3 @@
+*.o
+config/peoplenet/*
+deepstream-occupancy-analytics

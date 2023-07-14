@@ -39,12 +39,11 @@ gpu-id=0
 #(4): nvbuf-mem-surface-array - Allocate Surface Array memory, applicable for Jetson
 nvbuf-memory-type=0
 
-
 [source0]
 enable=1
 #Type - 1=CameraV4L2 2=URI 3=MultiURI
 type=3
-uri=file:///opt/nvidia/deepstream/deepstream-5.1/sources/apps/sample_apps/demo/out.mp4
+uri=file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_1080p_h264.mp4
 num-sources=1
 gpu-id=0
 nvbuf-memory-type=0
@@ -53,7 +52,7 @@ nvbuf-memory-type=0
 enable=1
 #Type - 1=CameraV4L2 2=URI 3=MultiURI 4=RTSP
 type=3
-uri=file:///opt/nvidia/deepstream/deepstream-5.1/samples/streams/sample_1080p_h264.mp4
+uri=file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_1080p_h264.mp4
 num-sources=1
 gpu-id=0
 nvbuf-memory-type=0
@@ -66,10 +65,8 @@ smart-rec-start-time=1
 smart-rec-start-time=1
 smart-rec-file-prefix=smart_record
 #smart-rec-dir-path=/home/monika/record
-# video cache size in seconds
-smart-rec-video-cache=10
-
-
+# cache size in seconds
+smart-rec-cache=10
 
 [sink0]
 enable=1
@@ -94,13 +91,15 @@ source-id=0
 enable=1
 #Type - 1=FakeSink 2=EglSink 3=File 4=UDPSink 5=nvoverlaysink 6=MsgConvBroker
 type=6
-msg-conv-config=dstest5_msgconv_sample_config.txt
+# msg-conv-msg2p-lib=/opt/nvidia/deepstream/deepstream/sources/apps/sample_apps/deepstream-occupancy-analytics/bin/jetson/libnvds_msgconv.so
+# msg-conv-msg2p-lib=/opt/nvidia/deepstream/deepstream/sources/apps/sample_apps/deepstream-occupancy-analytics/bin/x86/libnvds_msgconv.so
+msg-conv-config=msgconv_sample_config.txt
 #(0): PAYLOAD_DEEPSTREAM - Deepstream schema payload
 #(1): PAYLOAD_DEEPSTREAM_MINIMAL - Deepstream schema payload minimal
 #(256): PAYLOAD_RESERVED - Reserved type
 #(257): PAYLOAD_CUSTOM   - Custom schema payload
 msg-conv-payload-type=0
-msg-broker-proto-lib=/opt/nvidia/deepstream/deepstream-5.1/lib/libnvds_kafka_proto.so
+msg-broker-proto-lib=/opt/nvidia/deepstream/deepstream/lib/libnvds_kafka_proto.so
 #Provide your msg-broker-conn-str here
 msg-broker-conn-str=localhost;9092;quickstart-events
 #topic=<topic>
@@ -139,12 +138,12 @@ msg-conv-payload-type=0
 # Configure this group to enable cloud message consumer.
 [message-consumer0]
 enable=0
-proto-lib=/opt/nvidia/deepstream/deepstream-5.0/lib/libnvds_kafka_proto.so
+proto-lib=/opt/nvidia/deepstream/deepstream/lib/libnvds_kafka_proto.so
 conn-str=localhost;9092
 #config-file=<broker config file e.g. cfg_kafka.txt>
 subscribe-topic-list=quickstart-events
 # Use this option if message has sensor name as id instead of index (0,1,2 etc.).
-sensor-list-file=dstest5_msgconv_sample_config.txt
+sensor-list-file=msgconv_sample_config.txt.txt
 
 [osd]
 enable=1
@@ -191,28 +190,25 @@ bbox-border-color0=1;0;0;1
 #bbox-border-color3=0;1;0;1
 nvbuf-memory-type=0
 interval=0
-gie-unique-id=1
-model-engine-file=peoplenet/resnet34_peoplenet_pruned.etlt_b1_gpu0_int8.engine
-labelfile-path=peoplenet/labels.txt
-config-file=config_infer_primary_peoplenet.txt
+config-file=pgie_peoplenet_tao_config.txt
 #infer-raw-output-dir=../../../../../samples/primary_detector_raw_output/
 
 [tracker]
-enable=1
 tracker-width=640
-tracker-height=288
-ll-lib-file=/opt/nvidia/deepstream/deepstream-5.1/lib/libnvds_nvdcf.so
-#ll-config-file required for DCF/IOU only
-ll-config-file=tracker_config.yml
-#ll-config-file=iou_config.txt
+tracker-height=384
 gpu-id=0
-#enable-batch-process applicable to DCF only
+ll-lib-file=/opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+# ll-config-file required to set different tracker types
+# ll-config-file=../../../../samples/configs/deepstream-app/config_tracker_IOU.yml
+# ll-config-file=../../../../samples/configs/deepstream-app/config_tracker_NvSORT.yml
+ll-config-file=../../../../samples/configs/deepstream-app/config_tracker_NvDCF_perf.yml
+# ll-config-file=../../../../samples/configs/deepstream-app/config_tracker_NvDCF_accuracy.yml
+# ll-config-file=../../../../samples/configs/deepstream-app/config_tracker_NvDeepSORT.yml
 enable-batch-process=0
-
 
 [nvds-analytics]
 enable=1
-config-file=config_nvdsanalytics.txt
+config-file=nvdsanalytics_config.txt
 
 [tests]
 file-loop=0

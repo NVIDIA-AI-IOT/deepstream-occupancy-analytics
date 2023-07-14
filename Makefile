@@ -22,15 +22,14 @@
 
 CUDA_VER?=
 ifeq ($(CUDA_VER),)
-        $(error "CUDA_VER is not set run: export CUDA_VER=11.1")
-
+    $(error "CUDA_VER is not set")
 endif
 
-APP:= deepstream-test5-analytics
+APP:= deepstream-occupancy-analytics
 
 TARGET_DEVICE = $(shell gcc -dumpmachine | cut -f1 -d -)
 
-NVDS_VERSION:=5.1
+NVDS_VERSION:=6.2
 
 LIB_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)/lib/
 APP_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)/bin/
@@ -39,10 +38,10 @@ ifeq ($(TARGET_DEVICE),aarch64)
   CFLAGS:= -DPLATFORM_TEGRA
 endif
 
-SRCS:= deepstream_test5_app_main.c 
-SRCS+= ../deepstream-test5/deepstream_utc.c
-SRCS+= ../deepstream-app/deepstream_app.c ../deepstream-app/deepstream_app_config_parser.c
-SRCS+= $(wildcard ../../apps-common/src/*.c)
+SRCS := deepstream_test5_app_main.c
+SRCS += ../deepstream-test5/deepstream_utc.c
+SRCS += ../deepstream-app/deepstream_app.c ../deepstream-app/deepstream_app_config_parser.c
+SRCS += $(wildcard ../../apps-common/src/*.c)
 
 INCS= $(wildcard *.h)
 INC_DIR=../deepstream-test5
@@ -56,7 +55,8 @@ CFLAGS+= -I../../apps-common/includes -I./includes -I../../../includes -I../deep
 CFLAGS+= -I$(INC_DIR)
 CFLAGS+= -I/usr/local/cuda-$(CUDA_VER)/include
 
-LIBS+= -L$(LIB_INSTALL_DIR) -lnvdsgst_meta -lnvds_meta -lnvdsgst_helper -lnvdsgst_smartrecord -lnvds_utils -lnvds_msgbroker -lm \
+LIBS+= -L$(LIB_INSTALL_DIR) -lnvdsgst_meta -lnvds_meta -lnvdsgst_helper \
+       -lnvdsgst_customhelper -lnvdsgst_smartrecord -lnvds_utils -lnvds_msgbroker -lm \
        -lgstrtspserver-1.0 -ldl -Wl,-rpath,$(LIB_INSTALL_DIR)
 LIBS+= -L/usr/local/cuda-$(CUDA_VER)/lib64/ -lcudart
 
@@ -64,18 +64,18 @@ CFLAGS+= `pkg-config --cflags $(PKGS)`
 
 LIBS+= `pkg-config --libs $(PKGS)`
 
-all: $(APP)
+all:$(APP)
 
-deepstream_nvdsanalytics_meta.o: deepstream_nvdsanalytics_meta.cpp $(INCS) Makefile
+deepstream_nvdsanalytics_meta.o:deepstream_nvdsanalytics_meta.cpp $(INCS)
 	$(CXX) -c -o $@ -Wall -Werror $(CFLAGS) $<
 
-%.o: %.c $(INCS) Makefile
-	$(CC) -c -o $@  $(CFLAGS) $<
+%.o:%.c $(INCS)
+	$(CC) -c -o $@ $(CFLAGS) $<
 
-$(APP): $(OBJS) Makefile
+$(APP):$(OBJS)
 	$(CXX) -o $(APP) $(OBJS) $(LIBS)
 
-install: $(APP)
+install:$(APP)
 	cp -rv $(APP) $(APP_INSTALL_DIR)
 
 clean:
