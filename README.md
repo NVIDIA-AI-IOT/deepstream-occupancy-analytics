@@ -52,29 +52,44 @@ To learn how to build this demo step-by-step, check out the on-demand webinar on
 - Download peoplnet model: `cd deepstream-occupancy-analytics/config && ./model.sh`
 - For Jetson use:  bin/jetson/libnvds_msgconv.so
 - For x86 use: bin/x86/libnvds_msgconv.so
-	 
 
-## Build
+## Build and Configure
 
- `cd deepstream-occupancy-analytics && make`
+- Set CUDA_VER in the MakeFile as per platform.
+
+  For Jetson, CUDA_VER=11.4
+
+  For x86, CUDA_VER=11.8
+
+  `cd deepstream-occupancy-analytics && make`
+
+- Set **msg-conv-msg2p-lib** at **[sink1]** group in
+  **dstest_occupancy_analytics.txt** as per platform
+
+  For Jetson
+
+  msg-conv-msg2p-lib=$DEEPSTREAM_SDK_PATH/deepstream-occupancy-analytics/bin/jetson/libnvds_msgconv.so
+
+  For x86
+
+  msg-conv-msg2p-lib=$DEEPSTREAM_SDK_PATH/deepstream-occupancy-analytics/bin/x86/libnvds_msgconv.so
 
 ## Run 
 
- `./deepstream-test5-analytics -c config/dstest_occupancy_analytics.txt`
+  `./deepstream-test5-analytics -c config/dstest_occupancy_analytics.txt`
 
   In another terminal run this command to see the kafka messages:
 
- `bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092`
+  `bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092`
 
 
 ## Output
 
   The output will look like this: 
 
-  ![alt-text](https://github.com/NVIDIA-AI-IOT/deepstream-occupancy-analytics/blob/master/images/kafka_messages.gif)
+  ![alt-text](images/kafka_messages.gif)
 
   Where you can see the kafka messages for entry and exit count.
-  
 
 ## References
 

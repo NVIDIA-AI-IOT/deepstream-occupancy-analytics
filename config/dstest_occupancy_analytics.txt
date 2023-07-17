@@ -143,7 +143,7 @@ conn-str=localhost;9092
 #config-file=<broker config file e.g. cfg_kafka.txt>
 subscribe-topic-list=quickstart-events
 # Use this option if message has sensor name as id instead of index (0,1,2 etc.).
-sensor-list-file=msgconv_sample_config.txt.txt
+sensor-list-file=msgconv_sample_config.txt
 
 [osd]
 enable=1
