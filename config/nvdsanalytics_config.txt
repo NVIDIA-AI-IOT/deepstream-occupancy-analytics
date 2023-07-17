@@ -100,4 +100,3 @@ enable=0
 direction-South=284;840;360;662;
 direction-North=1106;622;1312;701;
 class-id=0
-

@@ -22,24 +22,22 @@
 
 CUDA_VER?=
 ifeq ($(CUDA_VER),)
-        $(error "CUDA_VER is not set run: export CUDA_VER=11.1")
-
+  $(error "CUDA_VER is not set")
 endif
 
 APP:= deepstream-test5-analytics
 
 TARGET_DEVICE = $(shell gcc -dumpmachine | cut -f1 -d -)
+DS_VER = $(shell deepstream-app -v | awk '$$1~/DeepStreamSDK/ {print substr($$2,1,3)}' )
 
-NVDS_VERSION:=5.1
-
-LIB_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)/lib/
-APP_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)/bin/
+LIB_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(DS_VER)/lib/
+APP_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(DS_VER)/bin/
 
 ifeq ($(TARGET_DEVICE),aarch64)
   CFLAGS:= -DPLATFORM_TEGRA
 endif
 
-SRCS:= deepstream_test5_app_main.c 
+SRCS:= deepstream_test5_app_main.c
 SRCS+= ../deepstream-test5/deepstream_utc.c
 SRCS+= ../deepstream-app/deepstream_app.c ../deepstream-app/deepstream_app_config_parser.c
 SRCS+= $(wildcard ../../apps-common/src/*.c)
@@ -56,7 +54,8 @@ CFLAGS+= -I../../apps-common/includes -I./includes -I../../../includes -I../deep
 CFLAGS+= -I$(INC_DIR)
 CFLAGS+= -I/usr/local/cuda-$(CUDA_VER)/include
 
-LIBS+= -L$(LIB_INSTALL_DIR) -lnvdsgst_meta -lnvds_meta -lnvdsgst_helper -lnvdsgst_smartrecord -lnvds_utils -lnvds_msgbroker -lm \
+LIBS+= -L$(LIB_INSTALL_DIR) -lnvdsgst_meta -lnvds_meta -lnvdsgst_helper \
+       -lnvdsgst_customhelper -lnvdsgst_smartrecord -lnvds_utils -lnvds_msgbroker -lm \
        -lgstrtspserver-1.0 -ldl -Wl,-rpath,$(LIB_INSTALL_DIR)
 LIBS+= -L/usr/local/cuda-$(CUDA_VER)/lib64/ -lcudart
 
